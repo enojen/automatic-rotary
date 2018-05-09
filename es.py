@@ -21,15 +21,15 @@ response = client.search(
       "post_tags" : ["</a>"],
       "fields": {
         "message": {
-          "number_of_fragments" : 3,
-          "fragment_size" : 2500
+          "number_of_fragments" : 20,
+          "no_match_size": 50,
+          "fragment_size" : 200
           
         }
       }
     }
     }
 )
-
 for hit in response['hits']['hits']:
     a = str(hit['highlight']['message'])
     y = a.replace("</a> <a href='hyperlinkvariable'>", " ")
@@ -38,3 +38,5 @@ for hit in response['hits']['hits']:
     t = hyperlink.replace("ş", "s").replace("ç", "c").replace(" ", "-").replace("ı", "i").replace("ğ", "g").replace(" ", "-").replace("ö", "o").replace("ü", "u")
     k = y.replace("hyperlinkvariable", ("http://127.0.0.1/" + t))
     print(k)
+
+
