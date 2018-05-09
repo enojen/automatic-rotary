@@ -48,7 +48,6 @@ for doc in docs:
     clauses = []
     for abcd in terms:
         term = abcd.lower()
-        print(term)
         field = SpanTerm(title=term)
         clauses.append(field)
     query = SpanNear(clauses=clauses)
