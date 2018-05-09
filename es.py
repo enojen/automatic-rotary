@@ -23,7 +23,7 @@ response = client.search(
         "percolate" : {
             "field": "query",
             "document" : {
-                "message" : userdoc
+                "title" : userdoc
             }
         }
     },
@@ -31,7 +31,7 @@ response = client.search(
       "pre_tags" : ["<a href='hyperlinkvariable'>"],
       "post_tags" : ["</a>"],
       "fields": {
-        "message": {
+        "title": {
           "number_of_fragments" : 20,
           "no_match_size": 50,
           "fragment_size" : 200
@@ -43,7 +43,7 @@ response = client.search(
 )
 
 for hit in response['hits']['hits']:
-    a = str(hit['highlight']['message'])
+    a = str(hit['highlight']['title'])
     y = a.replace("</a> <a href='hyperlinkvariable'>", " ")
     soup = BeautifulSoup(y, 'html.parser')
     hyperlink = soup.a.string
