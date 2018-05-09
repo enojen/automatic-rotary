@@ -27,6 +27,7 @@ connections.configure(
 
 class Document(DocType):
     title = Text()
+   
     query = Percolator()
 
     class Meta:
@@ -43,8 +44,11 @@ Document.init()
 # index the query
 for doc in docs:
     terms = doc['title'].split(" ")
+   
     clauses = []
-    for term in terms:
+    for abcd in terms:
+        term = abcd.lower()
+        print(term)
         field = SpanTerm(title=term)
         clauses.append(field)
     query = SpanNear(clauses=clauses)
