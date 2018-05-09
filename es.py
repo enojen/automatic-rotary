@@ -36,6 +36,6 @@ for hit in response['hits']['hits']:
     y = a.replace("</a> <a href='hyperlinkvariable'>", " ")
     soup = BeautifulSoup(y, 'html.parser')
     hyperlink = soup.a.string
-    t = hyperlink.replace("ş", "s").replace("ç", "c").replace(" ", "-")
+    t = hyperlink.replace("ş", "s").replace("ç", "c").replace(" ", "-").replace("ı", "i").replace("ğ", "g").replace(" ", "-").replace("ö", "o").replace("ü", "u")
     k = y.replace("hyperlinkvariable", ("http://127.0.0.1/" + t))
     print(k)
