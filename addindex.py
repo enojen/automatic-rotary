@@ -47,7 +47,8 @@ for doc in docs:
    
     clauses = []
     for abcd in terms:
-        term = abcd.lower()
+        x = abcd.replace("İ", "i").replace(",", "").replace("î", "i").replace("I", "ı")
+        term = x.lower()
         field = SpanTerm(title=term)
         clauses.append(field)
     query = SpanNear(clauses=clauses)
