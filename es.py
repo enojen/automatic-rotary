@@ -8,9 +8,7 @@ def ask_input(a):
   global userdoc
   while(not userdoc):
     userdoc = input(a)
-  #userdoc = userdoc.replace(",", " , ")
-  print(userdoc)
-  return
+  userdoc = userdoc.replace(",", " , ")
 
 def elastic():
   global userdoc
