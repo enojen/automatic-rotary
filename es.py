@@ -33,8 +33,8 @@ response = client.search(
       "fields": {
         "title": {
           "number_of_fragments" : 20,
-          "no_match_size": 50,
-          "fragment_size" : 200
+          "no_match_size": 2000,
+          "fragment_size" : 2000
           
         }
       }
@@ -47,7 +47,7 @@ for hit in response['hits']['hits']:
     y = a.replace("</a> <a href='hyperlinkvariable'>", " ")
     soup = BeautifulSoup(y, 'html.parser')
     hyperlink = soup.a.string
-    t = hyperlink.replace("ş", "s").replace("ç", "c").replace(" ", "-").replace("ı", "i").replace("ğ", "g").replace(" ", "-").replace("ö", "o").replace("ü", "u")
+    t = hyperlink.replace("ş", "s").replace("ç", "c").replace(" ", "-").replace("ı", "i").replace("ğ", "g").replace(" ", "-").replace("ö", "o").replace("ü", "u").replace("Ş", "ş").replace("Ç", "ç").replace("İ", "i").replace("Ü", "ü").replace("Ö", "ö").replace("(", "").replace(")", "")
     k = y.replace("hyperlinkvariable", ("http://127.0.0.1/" + t))
     f(k)
 
