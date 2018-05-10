@@ -30,6 +30,7 @@ es = connections.create_connection(hosts=['localhost'], timeout=20)
 class Document(DocType):
     title = Text(analyzer=anal)
     query = Percolator()
+    doc_id = Text()
 
     class Meta:
         index = 'my-index'
@@ -45,13 +46,14 @@ Document.init()
 # index the query
 for doc in docs:
     terms = doc['title'].split(" ")
-
+    get_id = doc['id']
     clauses = []
     for abcd in terms:
-        x = abcd.replace("İ", "i").replace(",", "").replace("î", "i").replace("I", "ı")
+        x = abcd.replace("İ", "i").replace(
+            ",", "").replace("î", "i").replace("I", "ı")
         term = x.lower()
         field = SpanTerm(title=term)
         clauses.append(field)
     query = SpanNear(clauses=clauses)
-    item = Document(query=query)
+    item = Document(query=query, doc_id=get_id)
     item.save()
