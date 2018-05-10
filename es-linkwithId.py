@@ -1,6 +1,7 @@
 from elasticsearch import Elasticsearch
 from bs4 import BeautifulSoup
-import webbrowser, os
+import webbrowser
+import os
 
 userdoc = ""
 arr = []
@@ -45,8 +46,9 @@ def elastic():
         get_doc_id = str(hit['_source']['doc_id'])
         title = str(hit['highlight']['title'])
         title = title.replace("</a> <a href='hyperlinkvariable'>", " ")
-        soup = BeautifulSoup(title, 'html.parser')        
-        title = title.replace("hyperlinkvariable", ("http://127.0.0.1/" + get_doc_id))
+       # soup = BeautifulSoup(title, 'html.parser')
+        title = title.replace("hyperlinkvariable",
+                              ("http://127.0.0.1/" + get_doc_id))
         f(title)
 
 
