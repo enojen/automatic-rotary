@@ -20,14 +20,10 @@ data = json.loads(json_data)
 docs = data['response']['docs']
 
 # creating a new default elasticsearch connection
-connections.configure(
-    default={'hosts': 'localhost:9200'},
-)
-
+es = connections.create_connection(hosts=['localhost'], timeout=20)
 
 class Document(DocType):
-    title = Text()
-   
+    title = Text()   
     query = Percolator()
 
     class Meta:
