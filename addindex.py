@@ -5,7 +5,8 @@ from elasticsearch_dsl import (
     DocType,
     Mapping,
     Percolator,
-    Text
+    Text,
+    analyzer
 )
 from elasticsearch_dsl.query import (
     SpanNear,
@@ -19,11 +20,15 @@ data = json.loads(json_data)
 
 docs = data['response']['docs']
 
+anal = analyzer('standard_lowercase',
+                tokenizer="whitespace", filter=["lowercase"])
+
 # creating a new default elasticsearch connection
 es = connections.create_connection(hosts=['localhost'], timeout=20)
 
+
 class Document(DocType):
-    title = Text()   
+    title = Text(analyzer=anal)
     query = Percolator()
 
     class Meta:
@@ -40,7 +45,7 @@ Document.init()
 # index the query
 for doc in docs:
     terms = doc['title'].split(" ")
-   
+
     clauses = []
     for abcd in terms:
         x = abcd.replace("İ", "i").replace(",", "").replace("î", "i").replace("I", "ı")
