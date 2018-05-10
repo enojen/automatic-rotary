@@ -72,7 +72,7 @@ def write_html():
         message = arr[len(arr)-1]
         f.write(message)
         f.close()
-        filename = 'file:///Users/kerem/Desktop/es/index.html'
+        filename = 'file:///home/enojen/Desktop/research-python/index.html'
         webbrowser.open_new_tab(filename)
     except:
         print("No result!")
