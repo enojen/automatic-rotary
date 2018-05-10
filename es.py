@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 
 arr = []
 userdoc = input('Please enter your document: ')
+userdoc = userdoc.replace(",", " , ")
 client = Elasticsearch()
 def f(k):
     global arr
@@ -13,6 +14,7 @@ def f(k):
     str_text = str(plaintext)
     global userdoc
     userdoc = userdoc.replace(str_text, str_link)
+    userdoc = userdoc.replace(" , ", ", ")
     return arr.append(userdoc)
 #abc = "Anasayfa, seçkin maddelerden birinin giriş bölümünün sergilendiği bir bölüme sahiptir. Bu bölümde, okuyuculara Vikipedi'nin ürettiği en başarılı içerik örnekleri sergilenmektedir. Bu ayın anasayfaya çıkan seçkin madde listesi buradan görülebilir. Maddenin anasayfaya çıkabilmesi için seçkin madde statüsünde olması gerekmektedir (herhangi bir maddeyi aday göstermek için bkz: Vikipedi:Seçkin madde adayları). Seçkin madde statüsü alan maddeler, seçilme sıralarına göre kronolojik olarak anasayfaya çıkarlar. Seçkin içerik sorumluları, anasayfaya çıkacak olan maddelerin düzeninden ve sistemin sağlıklı işleyişinden sorumludur. Konuyla ilgili bilgi almak veya herhangi bir sorun bildirmek için lütfen sorumluların sayfasına mesaj bırakın maddelerden."
 
