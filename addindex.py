@@ -20,7 +20,7 @@ data = json.loads(json_data)
 
 docs = data['response']['docs']
 
-anal = analyzer('standard_lowercase',
+analizer = analyzer('standard_lowercase',
                 tokenizer="whitespace", filter=["lowercase"])
 
 # creating a new default elasticsearch connection
@@ -28,7 +28,7 @@ es = connections.create_connection(hosts=['localhost'], timeout=20)
 
 
 class Document(DocType):
-    title = Text(analyzer=anal)
+    title = Text(analyzer=analizer)
     query = Percolator()
     doc_id = Text()
 
