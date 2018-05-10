@@ -1,5 +1,7 @@
 from elasticsearch import Elasticsearch
 from bs4 import BeautifulSoup
+import webbrowser
+
 
 arr = []
 userdoc = input('Please enter your document: ')
@@ -56,5 +58,10 @@ for hit in response['hits']['hits']:
 
 def main():
     global arr
-    print(arr[len(arr)-1])
+    f = open('index.html','w')
+    message = arr[len(arr)-1]
+    f.write(message)
+    f.close()
+    filename = 'file:///Users/kerem/Desktop/es/index.html'
+    webbrowser.open_new_tab(filename)
 main()
