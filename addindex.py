@@ -54,6 +54,6 @@ for doc in docs:
         term = x.lower()
         field = SpanTerm(title=term)
         clauses.append(field)
-    query = SpanNear(clauses=clauses)
+    query = SpanNear(clauses=clauses, slop=0, in_order=True)
     item = Document(query=query, doc_id=get_id)
     item.save()
