@@ -1,6 +1,6 @@
 from elasticsearch import Elasticsearch
 from bs4 import BeautifulSoup
-import webbrowser
+import webbrowser, os
 
 userdoc = ""
 arr = []
@@ -72,7 +72,7 @@ def write_html():
         message = arr[len(arr)-1]
         f.write(message)
         f.close()
-        filename = 'file:///Users/kerem/Desktop/es/index.html'
+        filename = 'file://' + os.getcwd() + '/index.html'
         webbrowser.open_new_tab(filename)
     except:
         print("No result!")
