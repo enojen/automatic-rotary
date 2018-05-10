@@ -72,11 +72,7 @@ def write_html():
         message = arr[len(arr)-1]
         f.write(message)
         f.close()
-<<<<<<< HEAD
         filename = 'file://' + os.getcwd() + '/index.html'
-=======
-        filename = 'file:///home/enojen/Desktop/research-python/index.html'
->>>>>>> d0e339a7754b70ee3f6d8a0b2fd6eed793f08334
         webbrowser.open_new_tab(filename)
     except:
         print("No result!")
