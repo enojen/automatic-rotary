@@ -44,10 +44,10 @@ for doc in docs:
     terms = doc['title'].split(" ")
     get_id = doc['id']
     clauses = []
-    for abcd in terms:
-        x = abcd.replace("İ", "i").replace(
+    for term in terms:
+        term = term.replace("İ", "i").replace(
             ",", "").replace("î", "i").replace("I", "ı")
-        term = x.lower()
+        term = term.lower()
         field = SpanTerm(title=term)
         clauses.append(field)
     query = SpanNear(clauses=clauses, slop=0, in_order=True)
