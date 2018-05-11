@@ -14,16 +14,14 @@ from elasticsearch_dsl.query import (
 )
 from elasticsearch import Elasticsearch
 
-# Read the json File
 json_data = open('titles.json').read()
 data = json.loads(json_data)
 
 docs = data['response']['docs']
 
 analizer = analyzer('standard_lowercase',
-                tokenizer="whitespace", filter=["lowercase"])
+                    tokenizer="whitespace", filter=["lowercase"])
 
-# creating a new default elasticsearch connection
 es = connections.create_connection(hosts=['localhost'], timeout=20)
 
 
@@ -40,10 +38,8 @@ class Document(DocType):
         return super(Document, self).save(**kwargs)
 
 
-# create the mappings in elasticsearch
 Document.init()
 
-# index the query
 for doc in docs:
     terms = doc['title'].split(" ")
     get_id = doc['id']
