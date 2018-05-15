@@ -6,10 +6,10 @@ userdoc = ""
 arr = []
 
 
-def ask_input(a):
-    global userdoc
-    while(not userdoc):
-        userdoc = input(a)
+def ask_input():
+    global userdoc    
+    f = open("text.txt", "r")
+    userdoc = f.read()          
     userdoc = userdoc.replace(",", " , ")
 
 
@@ -78,6 +78,11 @@ def write_html():
         print("No result!")
 
 
-ask_input("Please enter your document: ")
-elastic()
-write_html()
+try:
+    ask_input()
+    elastic()
+    write_html()
+except:
+    print("Error! Possible errors:")
+    print("- File may not be exist. Make sure text.txt exists in this directory")
+    print("- May be no result for this search")
