@@ -20,7 +20,7 @@ data = json.loads(json_data)
 docs = data['response']['docs']
 
 analizer = analyzer('standard_lowercase',
-                    tokenizer="whitespace", filter=["turkish_lowercase"])
+                    tokenizer="whitespace", filter=["lowercase"])
 
 es = connections.create_connection(hosts=['localhost'], timeout=20)
 
