@@ -85,4 +85,5 @@ try:
 except:
     print("Error! Possible errors:")
     print("- File may not be exist. Make sure text.txt exists in this directory")
-    print("- May be no result for this search")
+    print("- If text.txt exists, make sure there are some text in it.")
+    print("- May be no result for this search") 
