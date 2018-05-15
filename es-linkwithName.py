@@ -32,9 +32,9 @@ def elastic():
                 "post_tags": ["</a>"],
                 "fields": {
                     "title": {
-                        "number_of_fragments": 20,
-                        "no_match_size": 2000,
-                        "fragment_size": 2000
+                        "number_of_fragments": 0,
+                        "no_match_size": -1,
+                        "fragment_size": -1
 
                     }
                 }
