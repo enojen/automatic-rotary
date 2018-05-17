@@ -6,3 +6,6 @@ deneme.py
 titles2.json
 example_doc.txt
 text.txt
+__pycache__
+.vscode
+deneme.pyc
