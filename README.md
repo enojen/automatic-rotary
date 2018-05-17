@@ -9,7 +9,7 @@ This project aims setting hyperlink to given input with Elasticsearch stored que
 * Unix-like operating system (macOS or Linux)
 * `git` should be installed
 * `pip` should be installed
-
+* `flask` should be installed
 What things you need to install the software and how to install them
 
 ```
