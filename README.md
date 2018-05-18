@@ -17,7 +17,9 @@ What things you need to install the software and how to install them
     * `git` To install `$ sudo apt-get install git-core`, to check `$ git --version`
     * `pip` To install `$ sudo apt-get install python-pip`, to check `$ pip -v`    
     * `elasticsearch` To install, first you need to install `wget`. After that, The Oracle JDK 8 installed.
-        * `$ sudo apt-get update` and `$ sudo apt install wget apt-transport-https`. To install java, `$ sudo add-apt-repository ppa:webupd8team/java` and `$ sudo apt install oracle-java8-installer`, to check `$ java -version`. Finally, we're ready to install elasticsearch.
+        * `$ sudo apt-get update` and `$ sudo apt install wget apt-transport-https`.
+        * To install java, `$ sudo add-apt-repository ppa:webupd8team/java` and `$ sudo apt install oracle-java8-installer`, to check `$ java -version`.
+        * Finally, we're ready to install elasticsearch.
         `$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
         `$ sudo apt-get update && sudo apt-get install elasticsearch`, to check `$ elasticsearch --version` and , to check `$ curl localhost:9200`
 - on macOS
