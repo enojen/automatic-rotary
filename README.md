@@ -21,12 +21,12 @@ What things you need to install the software and how to install them
         * To install java, `$ sudo add-apt-repository ppa:webupd8team/java` and `$ sudo apt install oracle-java8-installer`, to check `$ java -version`.
         * Finally, we're ready to install elasticsearch.
         `$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
-        `$ sudo apt-get update && sudo apt-get install elasticsearch`, to check `$ curl localhost:9200`
+        `$ sudo apt-get update && sudo apt-get install elasticsearch`, to check `$ cd /usr/share/elasticsearch/bin` and `$ sudo ./elasticsearch --version`
 - on macOS
     * You need to install first, `brew` package manager. `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` to check `$ brew --version`
     * `git` To install `$ brew install git`, to check `$ git --version`
     * `pip` To install `$ brew install python`, to check `$ python --version`
-    * `elasticsearch` To install `$ brew install elasticsearch`, to check `$ elasticsearch --version` and , to check `$ curl localhost:9200`
+    * `elasticsearch` To install `$ brew install elasticsearch`, to check `$ elasticsearch --version`
 
 
 ### Installing
@@ -56,6 +56,27 @@ elasticsearch
 ```
 cd /usr/share/elasticsearch/bin/
 sudo ./elasticsearch
+```
+
+* To check `elasticsearch` is working fine, `curl localhost:9200`.
+Expected result like this:
+
+```
+{
+  "name" : "CWs7tki",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "-UDHbLFBQS-JdatHqtfRHw",
+  "version" : {
+    "number" : "6.2.2",
+    "build_hash" : "10b1edd",
+    "build_date" : "2018-02-16T19:01:30.685723Z",
+    "build_snapshot" : false,
+    "lucene_version" : "7.2.1",
+    "minimum_wire_compatibility_version" : "5.6.0",
+    "minimum_index_compatibility_version" : "5.0.0"
+  },
+  "tagline" : "You Know, for Search"
+}
 ```
 
 Great! We're ready to go!
