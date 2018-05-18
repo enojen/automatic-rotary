@@ -1,3 +1,5 @@
+#coding:utf8
+#!/usr/bin/env python # -*- coding: latin-1 -*-
 import json
 
 from elasticsearch_dsl import (
