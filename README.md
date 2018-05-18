@@ -15,13 +15,16 @@ What things you need to install the software and how to install them
 
 - on Ubuntu
     * `git` To install `$ sudo apt-get install git-core`, to check `$ git --version`
-    * `pip` To install `$ sudo apt-get install python-pip`, to check `$ pip -v`    
+    * `pip` To install `$ sudo apt-get install python-pip`, to check `$ pip -V`    
     * `elasticsearch` To install, first you need to install `wget`. After that, The Oracle JDK 8 installed.
         * `$ sudo apt-get update` and `$ sudo apt install wget curl apt-transport-https`.
         * To install java, `$ sudo add-apt-repository ppa:webupd8team/java` and `$ sudo apt install oracle-java8-installer`, to check `$ java -version`.
         * Finally, we're ready to install elasticsearch.
-        `$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
-        `$ sudo apt-get update && sudo apt-get install elasticsearch`, to check `$ cd /usr/share/elasticsearch/bin` and `$ sudo ./elasticsearch --version`
+            * `$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
+            * `echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list`
+            * `$ sudo apt-get update && sudo apt-get install elasticsearch`
+            * to check `$ cd /usr/share/elasticsearch/bin`
+            * and `$ sudo ./elasticsearch --version`
 - on macOS
     * You need to install first, `brew` package manager. `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` to check `$ brew --version`
     * `git` To install `$ brew install git`, to check `$ git --version`
