@@ -50,6 +50,7 @@ elasticsearch
 ```
 
 * on Ubuntu
+
 ```
 cd elasticsearch/bin
 ./elasticsearch
@@ -62,6 +63,7 @@ Great! We're ready to go!
 * Please make sure, `elasticsearch` is working fine and at `/research-python` directory.
 * First, you need to add mapping and create all queries.
     - `titles.json` file should be located at `/research-python` directory and json schema should be like this:
+
         ```
         {
             "responseHeader":{
@@ -94,11 +96,13 @@ Great! We're ready to go!
                  ]
         }}
         ```
+
     - Just run `python addindex.py` and sit back. This process depends on your setup(approximately ~10 min). To check process is working fine,
     `$ curl -X GET "localhost:9200/_cat/indices?v"` and you should see `doc.count` is counting.
 * After adding all indexes, you have two options, you can set hyperlink with `name` or `id`
     * To work with `name`
         * run `flask`
+
         ```
         FLASK_APP=es-linkwithName.py flask run
         ```
@@ -108,6 +112,7 @@ Great! We're ready to go!
 
     * To work with `id`
          * run `flask`
+
         ```
         FLASK_APP=es-linkwithId.py flask run
         ```
