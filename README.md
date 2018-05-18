@@ -15,7 +15,7 @@ What things you need to install the software and how to install them
 
 - on Ubuntu
     * `git` To install `$ sudo apt-get install git-core`, to check `$ git --version`
-    * `pip` To install `$ sudo apt-get install python-pip`, to check `$ pip -V`    
+    * `pip` To install `$ sudo apt-get install python-pip python3-pip`, to check `$ pip -V`    
     * `elasticsearch` To install, first you need to install `wget`. After that, The Oracle JDK 8 installed.
         * `$ sudo apt-get update` and `$ sudo apt install wget curl apt-transport-https`.
         * To install java, `$ sudo add-apt-repository ppa:webupd8team/java` and `$ sudo apt install oracle-java8-installer`, to check `$ java -version`.
