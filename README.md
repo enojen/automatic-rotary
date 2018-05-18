@@ -20,8 +20,10 @@ What things you need to install the software and how to install them
     * `flask` To install, `pip install Flask`, to check `pip show flask`
     * `elasticsearch` To install, first you need to install `wget`. After that, The Oracle JDK 8 installed.
         * `sudo apt-get update` and `sudo apt install wget apt-transport-https`. To install java, `sudo add-apt-repository ppa:webupd8team/java`, to check `java -version`. Finally, we're ready to install elasticsearch.
-        `wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
-        `sudo apt-get update && sudo apt-get install elasticsearch`
+        ```
+        wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+        sudo apt-get update && sudo apt-get install elasticsearch
+        ```
 
 ```
 Give examples
