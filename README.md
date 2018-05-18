@@ -8,14 +8,14 @@ This project aims setting hyperlink to given input with Elasticsearch stored que
 
 * Unix-like operating system (macOS or Linux)
 * `git` should be installed.
-* `pip` should be installed.
+* `pip3` should be installed.
 * `elasticsearch` should be installed.
 
 What things you need to install the software and how to install them
 
 - on Ubuntu
     * `git` To install `$ sudo apt-get install git-core`, to check `$ git --version`
-    * `pip` To install `$ sudo apt-get install python-pip python3-pip`, to check `$ pip -V`    
+    * `pip3` To install `$ sudo apt-get install python3-pip`, to check `$ pip3 -V`    
     * `elasticsearch` To install, first you need to install `wget`. After that, The Oracle JDK 8 installed.
         * `$ sudo apt-get update` and `$ sudo apt install wget curl apt-transport-https`.
         * To install java, `$ sudo add-apt-repository ppa:webupd8team/java` and `$ sudo apt install oracle-java8-installer`, to check `$ java -version`.
@@ -43,7 +43,7 @@ git clone https://github.com/keremcankabadayi/research-python.git && cd research
 Install project dependencies
 
 ```
-pip install -r requirements.txt 
+pip3 install -r requirements.txt 
 ```
 
 Finally, most important step is to start `elasticsearch`
