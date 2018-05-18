@@ -9,94 +9,108 @@ This project aims setting hyperlink to given input with Elasticsearch stored que
 * Unix-like operating system (macOS or Linux)
 * `git` should be installed.
 * `pip` should be installed.
-* `flask` should be installed.
 * `elasticsearch` should be installed.
 
 What things you need to install the software and how to install them
 
 - on Ubuntu
-    * `git` To install `sudo apt-get install git-core`, to check `git --version`
-    * `pip` To install `sudo apt-get install python-pip`, to check `pip -v`
-    * `flask` To install, `pip install Flask`, to check `pip show flask`
+    * `git` To install `$ sudo apt-get install git-core`, to check `$ git --version`
+    * `pip` To install `$ sudo apt-get install python-pip`, to check `$ pip -v`    
     * `elasticsearch` To install, first you need to install `wget`. After that, The Oracle JDK 8 installed.
-        * `sudo apt-get update` and `sudo apt install wget apt-transport-https`. To install java, `sudo add-apt-repository ppa:webupd8team/java`, to check `java -version`. Finally, we're ready to install elasticsearch.
-        ```
-        wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-        sudo apt-get update && sudo apt-get install elasticsearch
-        ```
+        * `$ sudo apt-get update` and `$ sudo apt install wget apt-transport-https`. To install java, `$ sudo add-apt-repository ppa:webupd8team/java` and `$ sudo apt install oracle-java8-installer`, to check `$ java -version`. Finally, we're ready to install elasticsearch.
+        `$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
+        `$ sudo apt-get update && sudo apt-get install elasticsearch`, to check `$ elasticsearch --version` and , to check `$ curl localhost:9200`
+- on macOS
+    * You need to install first, `brew` package manager. `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` to check `$ brew --version`
+    * `git` To install `$ brew install git`, to check `$ git --version`
+    * `pip` To install `$ brew install python`, to check `$ python --version`
+    * `elasticsearch` To install `$ brew install elasticsearch`, to check `$ elasticsearch --version` and , to check `$ curl localhost:9200`
 
-```
-Give examples
-```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+First, clone the project and go to the project directory
 
 ```
-Give the example
+git clone https://github.com/keremcankabadayi/research-python.git && cd research-python
 ```
 
-And repeat
+Install project dependencies
 
 ```
-until finished
+pip install -r requirements.txt 
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Finally, most important step is to start `elasticsearch`
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+* on macOS (If you used `brew` to install)
 
 ```
-Give an example
+elasticsearch
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
+* on Ubuntu
 ```
-Give an example
+cd elasticsearch/bin
+./elasticsearch
 ```
 
-## Deployment
+Great! We're ready to go!
 
-Add additional notes about how to deploy this on a live system
+## Usage
 
-## Built With
+* Please make sure, `elasticsearch` is working fine and at `/research-python` directory.
+* First, you need to add mapping and create all queries.
+    - `titles.json` file should be located at `/research-python` directory and json schema should be like this:
+        ```
+        {
+            "responseHeader":{
+                "status":0,
+                "QTime":95,
+                "params":{
+                "q":"*:*",
+                "indent":"on",
+                "fl":"CourseId, UnitId, title, CourseName, id, FieldId, field",
+                "rows":"170109",
+                "wt":"json"}},
+            "response":{"numFound":170109,"start":0,"docs":[
+                {
+                 "CourseId":...,
+                 "UnitId":...,
+                 "title":"...",
+                 "id":"...",
+                 "CourseName":"...",
+                 "FieldId":...,
+                 "field":"..."},
+                 {
+                 "CourseId":...,
+                 "UnitId":...,
+                 "title":"...",
+                 "id":"...",
+                 "CourseName":"...",
+                 "FieldId":...,
+                 "field":"..."},
+                 ...
+                 ]
+        }}
+        ```
+    - Just run `python addindex.py` and sit back. This process depends on your setup(approximately ~10 min). To check process is working fine,
+    `$ curl -X GET "localhost:9200/_cat/indices?v"` and you should see `doc.count` is counting.
+* After adding all indexes, you have two options, you can set hyperlink with `name` or `id`
+    * To work with `name`
+        * run `flask`
+        ```
+        FLASK_APP=es-linkwithName.py flask run
+        ```
+        * Go to `http://localhost:5000/`
+        * Paste your document
+        * See the magic!
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+    * To work with `id`
+         * run `flask`
+        ```
+        FLASK_APP=es-linkwithId.py flask run
+        ```
+        * Go to `http://localhost:5000/`
+        * Paste your document
+        * See the magic!
