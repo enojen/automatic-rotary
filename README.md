@@ -17,11 +17,11 @@ What things you need to install the software and how to install them
     * `git` To install `$ sudo apt-get install git-core`, to check `$ git --version`
     * `pip` To install `$ sudo apt-get install python-pip`, to check `$ pip -v`    
     * `elasticsearch` To install, first you need to install `wget`. After that, The Oracle JDK 8 installed.
-        * `$ sudo apt-get update` and `$ sudo apt install wget apt-transport-https`.
+        * `$ sudo apt-get update` and `$ sudo apt install wget curl apt-transport-https`.
         * To install java, `$ sudo add-apt-repository ppa:webupd8team/java` and `$ sudo apt install oracle-java8-installer`, to check `$ java -version`.
         * Finally, we're ready to install elasticsearch.
         `$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
-        `$ sudo apt-get update && sudo apt-get install elasticsearch`, to check `$ elasticsearch --version` and , to check `$ curl localhost:9200`
+        `$ sudo apt-get update && sudo apt-get install elasticsearch`, to check `$ curl localhost:9200`
 - on macOS
     * You need to install first, `brew` package manager. `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` to check `$ brew --version`
     * `git` To install `$ brew install git`, to check `$ git --version`
@@ -54,15 +54,15 @@ elasticsearch
 * on Ubuntu
 
 ```
-cd elasticsearch/bin
-./elasticsearch
+cd /usr/share/elasticsearch/bin/
+sudo ./elasticsearch
 ```
 
 Great! We're ready to go!
 
 ## Usage
 
-* Please make sure, `elasticsearch` is working fine and at `/research-python` directory.
+* Please make sure, `elasticsearch` is working fine and you're at `/research-python` directory.
 * First, you need to add mapping and create all queries.
     - `titles.json` file should be located at `/research-python` directory and json schema should be like this:
 
