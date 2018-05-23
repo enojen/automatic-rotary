@@ -23,7 +23,7 @@ def my_form_post():
     userdoc = text.replace(",", " , ")
     client = Elasticsearch()
     response = client.search(
-        index="my-index",
+        index="titles",
         body={
             "query": {
               "percolate": {
