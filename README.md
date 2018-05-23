@@ -2,6 +2,8 @@
 
 This project aims setting hyperlink to given input with Elasticsearch stored queries which means Elasticsearch Percolate query.
 
+![UI](ss.png)
+
 ## Getting Started
 
 ### Prerequisites
@@ -149,4 +151,4 @@ Great! We're ready to go!
 # To-do list
 
 - [ ] Pick if results are nested e.g. if dünya, dünya mirası sözleşmesi are being bit by Percolator, choose "dünya mirası sözleşmesi"
-- [ ] Promt all choices if there are many e.g. "kamu" word in titles are to be found. There should be a menu for all results.
+- [ ] Prompt all choices if there are many e.g. "kamu" word in titles are to be found. There should be a menu for all results.
