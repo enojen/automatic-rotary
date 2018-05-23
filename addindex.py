@@ -35,7 +35,7 @@ turkish = analysis.token_filter('turkish_lowercase', type="lowercase", language=
 # create a custom analyzer for turkish lowercase
 turkish_lowercase = analyzer('turkish_lowercase',
     type = "custom",
-    tokenizer="standard",
+    tokenizer="whitespace",
     filter=[turkish],
 )
 
