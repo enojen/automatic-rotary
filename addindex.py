@@ -8,6 +8,7 @@ from elasticsearch_dsl import (
     analyzer,
     connections,
     DocType,
+    Integer,
     Percolator,
     Text
 )
@@ -21,17 +22,6 @@ json_data = open('titles.json').read()
 data = json.loads(json_data)
 
 docs = data['response']['docs']
-
-# get all titles in a list
-titles = []
-for doc in docs:
-    # convert title to a dictionary
-    title = doc['title']
-    titles.append(title)
-
-# cleaning duplicated titles
-titles = list(dict.fromkeys(titles))
-# Still there are duplicated titles
 
 
 # create a new default elasticsearch connection
@@ -54,6 +44,7 @@ class Document(DocType):
         analyzer = turkish_lowercase,
         # term_vector = "with_positions_offsets",
     )
+    doc_id = Integer()
     query = Percolator()    # query is a percolator
 
     class Meta:
@@ -72,9 +63,10 @@ documents = []
 
 # index the query
 start = clock()
-for title in titles:
+for doc in docs:
     # convert title to a dictionary
-    terms = title.split(" ")
+    terms = doc['title'].split(" ")
+    doc_id = doc['id']
     # crate a dictionary for clauses
     clauses = []
     for term in terms:
@@ -88,7 +80,7 @@ for title in titles:
     else:
         query = SpanNear(clauses=clauses, slop=0, in_order=True)
     # create a new Document item with SpanNear query
-    item = Document(query=query) # title=doc['title'],
+    item = Document(query=query, doc_id=doc_id) # title=doc['title'],
     # add item to the list
     documents.append(item)
 print("Total time (getting titles as index documents): ", clock()-start)
