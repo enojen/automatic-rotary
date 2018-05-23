@@ -1,57 +1,99 @@
-#coding:utf8
-#!/usr/bin/env python # -*- coding: latin-1 -*-
 import json
 
+from time import clock
+
+from elasticsearch.helpers import bulk
 from elasticsearch_dsl import (
+    analysis,
+    analyzer,
     connections,
     DocType,
-    Mapping,
     Percolator,
-    Text,
-    analyzer
+    Text
 )
 from elasticsearch_dsl.query import (
     SpanNear,
     SpanTerm
 )
-from elasticsearch import Elasticsearch
 
+# Read the json File
 json_data = open('titles.json').read()
 data = json.loads(json_data)
 
 docs = data['response']['docs']
 
-analizer = analyzer('standard_lowercase',
-                    tokenizer="whitespace", filter=["lowercase"])
+# get all titles in a list
+titles = []
+for doc in docs:
+    # convert title to a dictionary
+    title = doc['title']
+    titles.append(title)
 
-es = connections.create_connection(hosts=['localhost'], timeout=20)
+# cleaning duplicated titles
+titles = list(dict.fromkeys(titles))
+# Still there are duplicated titles
 
+
+# create a new default elasticsearch connection
+connections.configure(
+    default={'hosts': 'localhost:9200'},
+)
+
+# create a new custom filter for lowercase in turkish
+turkish = analysis.token_filter('turkish_lowercase', type="lowercase", language="turkish")
+
+# create a custom analyzer for turkish lowercase
+turkish_lowercase = analyzer('turkish_lowercase',
+    type = "custom",
+    tokenizer="standard",
+    filter=[turkish],
+)
 
 class Document(DocType):
-    title = Text(analyzer=analizer)
-    query = Percolator()
-    doc_id = Text()
+    title = Text(
+        analyzer = turkish_lowercase,
+        # term_vector = "with_positions_offsets",
+    )
+    query = Percolator()    # query is a percolator
 
     class Meta:
-        index = 'my-index'
+        index = 'titles' # index name
         doc_type = '_doc'
 
     def save(self, **kwargs):
         return super(Document, self).save(**kwargs)
 
 
+# create the mappings in elasticsearch
 Document.init()
 
-for doc in docs:
-    terms = doc['title'].split(" ")
-    get_id = doc['id']
+# create a list for storing all documents
+documents = []
+
+# index the query
+start = clock()
+for title in titles:
+    # convert title to a dictionary
+    terms = title.split(" ")
+    # crate a dictionary for clauses
     clauses = []
     for term in terms:
-        term = term.replace("İ", "i").replace(
-            ",", "").replace("î", "i").replace("I", "ı")
-        term = term.lower()
-        field = SpanTerm(title=term)
+        # each word in terms going to be a SpanTerm
+        field = SpanTerm(title=term.lower())
+        # add each SpanTerm to clauses
         clauses.append(field)
-    query = SpanNear(clauses=clauses, slop=0, in_order=True)
-    item = Document(query=query, doc_id=get_id)
-    item.save()
+    # query going to be a SpanNear query
+    if len(clauses) <2:
+        query = clauses[0]
+    else:
+        query = SpanNear(clauses=clauses, slop=0, in_order=True)
+    # create a new Document item with SpanNear query
+    item = Document(query=query) # title=doc['title'],
+    # add item to the list
+    documents.append(item)
+print("Total time (getting titles as index documents): ", clock()-start)
+
+# register all documents in the index using bulk
+start = clock()
+bulk(connections.get_connection(), (d.to_dict(True) for d in documents))
+print("Total time (putting documents in index using bulk): ", clock()-start)
