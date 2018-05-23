@@ -151,4 +151,4 @@ Great! We're ready to go!
 # To-do list
 
 - [ ] Pick if results are nested e.g. if dünya, dünya mirası sözleşmesi are being bit by Percolator, choose "dünya mirası sözleşmesi"
-- [ ] Prompt all choices if there are many e.g. "kamu" word in titles are to be found. There should be a menu for all results.
+- [ ] Prompt all choices if there are many e.g. "kamu" word in titles are to be found 5-6 times. There should be a menu for all results.
