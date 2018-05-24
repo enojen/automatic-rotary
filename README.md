@@ -125,7 +125,7 @@ Great! We're ready to go!
         }}
         ```
 
-    - Just run `python addindex.py` and sit back. This process depends on your setup(approximately ~10 min). To check process is working fine,
+    - Just run `python3 addindex.py` and sit back. This process depends on your setup(approximately ~10 min). To check process is working fine,
     `$ curl -X GET "localhost:9200/_cat/indices?v"` and you should see `doc.count` is counting.
 * After adding all indexes, you have two options, you can set hyperlink with `name` or `id`
     * To work with `name`
