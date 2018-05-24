@@ -52,8 +52,8 @@ def my_form_post():
         title = title.replace("</a> <a href='hyperlinkvariable'>", " ")
         soup = BeautifulSoup(title, 'html.parser')
         hyperlink = soup.a.string
-        t = hyperlink.replace("ş", "s").replace("ç", "c").replace(" ", "-").replace("ı", "i").replace("ğ", "g").replace(" ", "-").replace("ö", "o").replace(
-            "ü", "u").replace("Ş", "ş").replace("Ç", "ç").replace("İ", "i").replace("Ü", "ü").replace("Ö", "ö").replace("(", "").replace(")", "").replace("â", "a")
+        t = hyperlink.replace("ş", "s").replace("ç", "c").replace(" ", "-").replace("ı", "i").replace("ğ", "g").replace("Ö", "ö").replace(" ", "-").replace("ö", "o").replace(
+            "ü", "u").replace("Ş", "ş").replace("Ç", "ç").replace("İ", "i").replace("Ü", "ü").replace("/", "-").replace("(", "").replace(")", "").replace("â", "a")
         title = title.replace("hyperlinkvariable", ("http://127.0.0.1/" + t))
         soup1 = BeautifulSoup(title, 'html.parser')
         withhyperlink = soup1.a
