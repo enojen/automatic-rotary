@@ -64,6 +64,8 @@ def my_form_post():
         userdoc = userdoc.replace(" , ", ", ")
 
         arr.append(userdoc)
-    message = arr[len(arr)-1]
-
+    try:
+        message = arr[len(arr)-1]
+    except:
+        message = "No result!"
     return message
